@@ -12,3 +12,40 @@ class Solution {
        sort(arr.begin()+a+1,arr.end());
     }
 };
+
+
+class Solution {
+public:
+    void sortIt(vector<int>& arr) {
+        int n = arr.size();
+        int left = 0, right = n - 1;
+
+        // Step 1: Partition odds and evens
+        while (left < right) {
+            if (arr[left] % 2 == 1) {
+                left++;
+            } 
+            else if (arr[right] % 2 == 0) {
+                right--;
+            } 
+            else {
+                swap(arr[left], arr[right]);
+                left++;
+                right--;
+            }
+        }
+
+        // Find index where even numbers start
+        int idx = 0;
+        while (idx < n && arr[idx] % 2 == 1) idx++;
+
+        // Step 2: Sort odds (descending)
+        sort(arr.begin(), arr.begin() + idx, greater<int>());
+
+        // Step 3: Sort evens (ascending)
+        sort(arr.begin() + idx, arr.end());
+    }
+};
+
+
+
